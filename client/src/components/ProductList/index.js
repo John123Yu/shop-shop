@@ -1,31 +1,44 @@
-import React from 'react';
-import { useQuery } from '@apollo/client';
+import React, { useEffect } from 'react'
+import { useQuery } from '@apollo/client'
 
-import ProductItem from '../ProductItem';
-import { QUERY_PRODUCTS } from '../../utils/queries';
-import spinner from '../../assets/spinner.gif';
+import ProductItem from '../ProductItem'
+import { QUERY_PRODUCTS } from '../../utils/queries'
+import spinner from '../../assets/spinner.gif'
+import { useStoreContext } from '../../utils/GlobalState'
+import { UPDATE_PRODUCTS } from '../../utils/actions'
 
-function ProductList({ currentCategory }) {
-  const { loading, data } = useQuery(QUERY_PRODUCTS);
+function ProductList () {
+  const [state, dispatch] = useStoreContext()
 
-  const products = data?.products || [];
+  const { currentCategory } = state
 
-  function filterProducts() {
+  const { loading, data } = useQuery(QUERY_PRODUCTS)
+
+  useEffect(() => {
+    if (data) {
+      dispatch({
+        type: UPDATE_PRODUCTS,
+        products: data.products
+      })
+    }
+  }, [data, dispatch])
+
+  function filterProducts () {
     if (!currentCategory) {
-      return products;
+      return state.products
     }
 
-    return products.filter(
-      (product) => product.category._id === currentCategory
-    );
+    return state.products.filter(
+      product => product.category._id === currentCategory
+    )
   }
 
   return (
-    <div className="my-2">
+    <div className='my-2'>
       <h2>Our Products:</h2>
-      {products.length ? (
-        <div className="flex-row">
-          {filterProducts().map((product) => (
+      {state.products.length ? (
+        <div className='flex-row'>
+          {filterProducts().map(product => (
             <ProductItem
               key={product._id}
               _id={product._id}
@@ -39,9 +52,9 @@ function ProductList({ currentCategory }) {
       ) : (
         <h3>You haven't added any products yet!</h3>
       )}
-      {loading ? <img src={spinner} alt="loading" /> : null}
+      {loading ? <img src={spinner} alt='loading' /> : null}
     </div>
-  );
+  )
 }
 
-export default ProductList;
+export default ProductList
