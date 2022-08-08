@@ -1,5 +1,10 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch, Routes } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Routes
+} from 'react-router-dom'
 import {
   ApolloClient,
   InMemoryCache,
@@ -15,6 +20,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Nav from './components/Nav'
 import OrderHistory from './pages/OrderHistory'
+import Success from './pages/Success'
 import { StoreProvider } from './utils/GlobalState'
 
 const httpLink = createHttpLink({
@@ -50,6 +56,7 @@ function App () {
               <Route path='/orderHistory' element={<OrderHistory />} />
               <Route path='/products/:id' element={<Detail />} />
               <Route path='*' element={<NoMatch />} />
+              <Route path='/success' element={<Success />} />
             </Routes>
           </StoreProvider>
         </div>
