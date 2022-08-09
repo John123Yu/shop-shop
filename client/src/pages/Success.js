@@ -11,7 +11,6 @@ export default function Success () {
     async function saveOrder () {
       const cart = await idbPromise('cart', 'get')
       const products = cart.map(item => {
-        console.log('item', item)
         return item._id
       })
       if (products.length) {

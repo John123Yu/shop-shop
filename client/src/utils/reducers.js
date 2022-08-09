@@ -13,7 +13,6 @@ import {
 } from './actions'
 
 export const reducer = (state, action) => {
-  console.log('Action', action)
   switch (action.type) {
     // if action type value is the value of `UPDATE_PRODUCTS`, return a new state object with an updated products array
     case UPDATE_PRODUCTS:
@@ -32,7 +31,6 @@ export const reducer = (state, action) => {
         currentCategory: action.currentCategory
       }
     case ADD_TO_CART:
-        console.log("BLUA")
       return {
         ...state,
         cartOpen: true,

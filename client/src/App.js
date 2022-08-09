@@ -2,7 +2,6 @@ import React from 'react'
 import {
   BrowserRouter as Router,
   Route,
-  Switch,
   Routes
 } from 'react-router-dom'
 import {
@@ -21,7 +20,6 @@ import Signup from './pages/Signup'
 import Nav from './components/Nav'
 import OrderHistory from './pages/OrderHistory'
 import Success from './pages/Success'
-import { StoreProvider } from './utils/GlobalState'
 import { Provider } from 'react-redux'
 
 import store from './utils/store'
@@ -50,20 +48,18 @@ function App () {
     <ApolloProvider client={client}>
       <Router>
         <div>
-          <StoreProvider>
-            <Provider store={store}>
-              <Nav />
-              <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/signup' element={<Signup />} />
-                <Route path='/orderHistory' element={<OrderHistory />} />
-                <Route path='/products/:id' element={<Detail />} />
-                <Route path='*' element={<NoMatch />} />
-                <Route path='/success' element={<Success />} />
-              </Routes>
-            </Provider>
-          </StoreProvider>
+          <Provider store={store}>
+            <Nav />
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/signup' element={<Signup />} />
+              <Route path='/orderHistory' element={<OrderHistory />} />
+              <Route path='/products/:id' element={<Detail />} />
+              <Route path='*' element={<NoMatch />} />
+              <Route path='/success' element={<Success />} />
+            </Routes>
+          </Provider>
         </div>
       </Router>
     </ApolloProvider>

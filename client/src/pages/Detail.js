@@ -4,7 +4,6 @@ import { useQuery } from '@apollo/client'
 
 import { QUERY_PRODUCTS } from '../utils/queries'
 import spinner from '../assets/spinner.gif'
-import { useStoreContext } from '../utils/GlobalState'
 import {
   REMOVE_FROM_CART,
   UPDATE_CART_QUANTITY,
@@ -21,7 +20,6 @@ const selectCart = state => state.cart
 
 
 function Detail () {
-  // const [state, dispatch] = useStoreContext()
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const cart = useSelector(selectCart)

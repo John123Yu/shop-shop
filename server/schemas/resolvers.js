@@ -60,7 +60,6 @@ const resolvers = {
       const line_items = []
 
       for (let i = 0; i < products.length; i++) {
-        console.log("prod", products[i])
         // generate product id
         const product = await stripe.products.create({
           name: products[i].name,
