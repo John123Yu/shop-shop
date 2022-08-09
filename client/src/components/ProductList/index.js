@@ -12,9 +12,6 @@ import { useSelector, useDispatch } from 'react-redux'
 const selectCurrentCategory = state => state.currentCategory
 const selectProducts = state => state.products
 function ProductList () {
-  // const [state, dispatch] = useStoreContext()
-
-  // const { currentCategory } = state
   const currentCategory = useSelector(selectCurrentCategory)
   const products = useSelector(selectProducts);
   const dispatch = useDispatch();

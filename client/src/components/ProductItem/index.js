@@ -4,13 +4,15 @@ import { pluralize } from '../../utils/helpers'
 import { useStoreContext } from '../../utils/GlobalState'
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from '../../utils/actions'
 import { idbPromise } from "../../utils/helpers";
+import { useSelector, useDispatch } from 'react-redux'
+
+const selectCart = state => state.cart;
 
 function ProductItem (item) {
   const { image, name, _id, price, quantity } = item
 
-  const [state, dispatch] = useStoreContext()
-
-  const { cart } = state
+  const cart = useSelector(selectCart)
+  const dispatch = useDispatch()
 
   const addToCart = () => {
     const itemInCart = cart.find((cartItem) => cartItem._id === _id)

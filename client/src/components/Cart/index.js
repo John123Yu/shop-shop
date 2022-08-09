@@ -9,11 +9,15 @@ import { idbPromise } from '../../utils/helpers'
 import { QUERY_CHECKOUT } from '../../utils/queries'
 import { loadStripe } from '@stripe/stripe-js'
 import { useLazyQuery } from '@apollo/client'
+import { useSelector, useDispatch } from 'react-redux'
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx')
 
 const Cart = () => {
-  const [state, dispatch] = useStoreContext()
+  //   const [state, dispatch] = useStoreContext()
+  const dispatch = useDispatch()
+  const state = useSelector(state => state)
+
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT)
 
   function toggleCart () {
@@ -55,11 +59,11 @@ const Cart = () => {
 
   useEffect(() => {
     if (data) {
-      stripePromise.then((res) => {
-        res.redirectToCheckout({ sessionId: data.checkout.session });
-      });
+      stripePromise.then(res => {
+        res.redirectToCheckout({ sessionId: data.checkout.session })
+      })
     }
-  }, [data]);
+  }, [data])
 
   if (!state.cartOpen) {
     return (

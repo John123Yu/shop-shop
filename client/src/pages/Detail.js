@@ -12,18 +12,26 @@ import {
   UPDATE_PRODUCTS
 } from '../utils/actions'
 import { idbPromise } from '../utils/helpers'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Cart from '../components/Cart'
 
+const selectProducts = state => state.products
+const selectCart = state => state.cart
+
+
 function Detail () {
-  const [state, dispatch] = useStoreContext()
+  // const [state, dispatch] = useStoreContext()
+  const dispatch = useDispatch()
+  const products = useSelector(selectProducts)
+  const cart = useSelector(selectCart)
   const { id } = useParams()
 
   const [currentProduct, setCurrentProduct] = useState({})
 
   const { loading, data } = useQuery(QUERY_PRODUCTS)
 
-  const { products, cart } = state
+  // const { products, cart } = state
 
   const addToCart = () => {
     const itemInCart = cart.find((cartItem) => cartItem._id === id)

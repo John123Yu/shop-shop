@@ -32,6 +32,7 @@ export const reducer = (state, action) => {
         currentCategory: action.currentCategory
       }
     case ADD_TO_CART:
+        console.log("BLUA")
       return {
         ...state,
         cartOpen: true,
