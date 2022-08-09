@@ -22,6 +22,9 @@ import Nav from './components/Nav'
 import OrderHistory from './pages/OrderHistory'
 import Success from './pages/Success'
 import { StoreProvider } from './utils/GlobalState'
+import { Provider } from 'react-redux'
+
+import store from './utils/store'
 
 const httpLink = createHttpLink({
   uri: '/graphql'
@@ -48,16 +51,18 @@ function App () {
       <Router>
         <div>
           <StoreProvider>
-            <Nav />
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/signup' element={<Signup />} />
-              <Route path='/orderHistory' element={<OrderHistory />} />
-              <Route path='/products/:id' element={<Detail />} />
-              <Route path='*' element={<NoMatch />} />
-              <Route path='/success' element={<Success />} />
-            </Routes>
+            <Provider store={store}>
+              <Nav />
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/signup' element={<Signup />} />
+                <Route path='/orderHistory' element={<OrderHistory />} />
+                <Route path='/products/:id' element={<Detail />} />
+                <Route path='*' element={<NoMatch />} />
+                <Route path='/success' element={<Success />} />
+              </Routes>
+            </Provider>
           </StoreProvider>
         </div>
       </Router>
