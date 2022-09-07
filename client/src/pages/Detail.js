@@ -18,6 +18,7 @@ import Cart from '../components/Cart'
 const selectProducts = state => state.products
 const selectCart = state => state.cart
 
+// console.log
 
 function Detail () {
   const dispatch = useDispatch()
