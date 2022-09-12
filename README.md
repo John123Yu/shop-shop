@@ -16,3 +16,5 @@ Prod:
 
 
 ![alt text](https://via.placeholder.com/200)
+
+<img src="https://via.placeholder.com/200" alt="Alt text" title="Optional title">
